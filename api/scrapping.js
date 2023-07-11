@@ -13,12 +13,17 @@ router.post("/", async (req, resp) => {
                    result += text;
                 }
             })
+            result = result.replace(/"/g,'')
             return resp.json({
-                information: result
+                information: `${result}`,
             })
         })
-        .catch(err => console.log(err))
-    }
+        .catch(err => resp.json({
+            information: ""
+        }))
+    } else return resp.json({
+        information: ""
+    })
    
 })
 module.exports = router;
